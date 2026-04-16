@@ -193,10 +193,11 @@ async def export_jobs_json(
 # PDF endpoint (Playwright server-side rendering)
 # ---------------------------------------------------------------------------
 
+import asyncio
 import html as _html
 from datetime import datetime
 from pydantic import BaseModel
-from playwright.async_api import async_playwright
+from playwright.sync_api import sync_playwright
 from backend.services.scraper_service import compute_stats
 
 
@@ -290,19 +291,26 @@ def _build_pdf_html(jobs: list[dict], stats: dict, total: int,
 </body></html>"""
 
 
-async def _html_to_pdf(html_content: str) -> bytes:
-    async with async_playwright() as p:
-        browser = await p.chromium.launch()
-        page = await browser.new_page()
-        await page.set_content(html_content, wait_until="networkidle")
-        pdf_bytes = await page.pdf(
+def _html_to_pdf_sync(html_content: str) -> bytes:
+    """Run Playwright in sync mode (avoids Windows asyncio subprocess limitation)."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.set_content(html_content, wait_until="networkidle")
+        pdf_bytes = page.pdf(
             format="A4",
             landscape=True,
             print_background=True,
             margin={"top": "0mm", "bottom": "0mm", "left": "0mm", "right": "0mm"},
         )
-        await browser.close()
+        browser.close()
     return pdf_bytes
+
+
+async def _html_to_pdf(html_content: str) -> bytes:
+    """Run sync Playwright in a thread pool to avoid blocking the event loop."""
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(None, _html_to_pdf_sync, html_content)
 
 
 @router.post("/tasks/{task_id}/export/pdf")
