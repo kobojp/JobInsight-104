@@ -32,6 +32,16 @@ _FILTER_PARAMS = dict(
     sort_dir=Query("desc"),
 )
 
+_EDU_MAP = {
+    "1": "不拘",
+    "2": "高中職以下",
+    "3": "高中職",
+    "4": "專科",
+    "5": "大學",
+    "6": "碩士",
+    "7": "博士",
+}
+
 CSV_FIELDS = [
     "job_name", "company_name", "job_addr_no_desc", "job_address",
     "salary_low", "salary_high", "salary_desc",
@@ -78,6 +88,14 @@ def _parse_filter_kwargs(
     )
 
 
+def _translate_edu(raw: str) -> str:
+    """Convert pipe-separated edu codes (e.g. '5|6') to Chinese labels."""
+    if not raw:
+        return ""
+    parts = [_EDU_MAP.get(code.strip(), code.strip()) for code in raw.split("|") if code.strip()]
+    return "、".join(parts)
+
+
 def _jobs_to_csv(jobs: list[dict]) -> str:
     output = io.StringIO()
     writer = csv.DictWriter(
@@ -88,7 +106,9 @@ def _jobs_to_csv(jobs: list[dict]) -> str:
     )
     writer.writerow(dict(zip(CSV_FIELDS, CSV_HEADERS)))
     for job in jobs:
-        writer.writerow({f: job.get(f, "") or "" for f in CSV_FIELDS})
+        row = {f: job.get(f, "") or "" for f in CSV_FIELDS}
+        row["option_edu"] = _translate_edu(str(row["option_edu"]))
+        writer.writerow(row)
     return "\ufeff" + output.getvalue()  # UTF-8 BOM for Excel
 
 
