@@ -109,6 +109,28 @@ export default function ExportButtons({ taskId, filters, stats, chartsRef }) {
   }
 
   return (
+    <>
+    {/* PDF 產生中遮罩 */}
+    {pdfLoading !== null && (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div className="bg-white rounded-2xl shadow-2xl px-10 py-8 flex flex-col items-center gap-4 min-w-[260px]">
+          {/* Spinner */}
+          <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+          {/* 主訊息 */}
+          <p className="text-base font-semibold text-gray-800">正在產生 PDF</p>
+          {/* 副訊息 */}
+          <p className="text-sm text-gray-500 text-center">
+            Chromium 渲染中，請稍候⋯<br />
+            <span className="text-xs text-gray-400">資料量較多時需要數秒</span>
+          </p>
+          {/* 跑馬燈進度條 */}
+          <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-full bg-blue-500 rounded-full animate-[progress_1.5s_ease-in-out_infinite]"
+                 style={{animation: 'indeterminate 1.5s ease-in-out infinite'}} />
+          </div>
+        </div>
+      </div>
+    )}
     <div className="flex items-center gap-2 flex-wrap">
       <span className="text-xs text-gray-400 mr-1">匯出：</span>
 
@@ -147,6 +169,14 @@ export default function ExportButtons({ taskId, filters, stats, chartsRef }) {
         <PdfIcon /> {pdfLoading === 'filtered' ? '產生中...' : '篩選 PDF'}
       </button>
     </div>
+    <style>{`
+      @keyframes indeterminate {
+        0%   { transform: translateX(-100%) scaleX(0.4); }
+        50%  { transform: translateX(0%)    scaleX(0.6); }
+        100% { transform: translateX(100%)  scaleX(0.4); }
+      }
+    `}</style>
+    </>
   )
 }
 
