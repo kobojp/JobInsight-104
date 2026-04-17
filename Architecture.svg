@@ -1,0 +1,254 @@
+<svg width="1600" height="1080" viewBox="0 0 1600 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1600" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"></stop>
+      <stop offset="1" stop-color="#111827"></stop>
+    </linearGradient>
+
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#111827"></stop>
+      <stop offset="1" stop-color="#0F172A"></stop>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#172033"></stop>
+      <stop offset="1" stop-color="#0F172A"></stop>
+    </linearGradient>
+
+    <linearGradient id="accentBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#60A5FA"></stop>
+      <stop offset="1" stop-color="#22D3EE"></stop>
+    </linearGradient>
+
+    <linearGradient id="accentPurple" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#A78BFA"></stop>
+      <stop offset="1" stop-color="#818CF8"></stop>
+    </linearGradient>
+
+    <linearGradient id="accentGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#34D399"></stop>
+      <stop offset="1" stop-color="#10B981"></stop>
+    </linearGradient>
+
+    <linearGradient id="accentOrange" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FBBF24"></stop>
+      <stop offset="1" stop-color="#F97316"></stop>
+    </linearGradient>
+
+    <linearGradient id="accentPink" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F472B6"></stop>
+      <stop offset="1" stop-color="#EC4899"></stop>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000000" flood-opacity="0.32"></feDropShadow>
+    </filter>
+
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#38BDF8" flood-opacity="0.18"></feDropShadow>
+    </filter>
+
+    <style>
+      .title { font: 700 34px "Segoe UI", "Noto Sans TC", sans-serif; fill: #F8FAFC; }
+      .subtitle { font: 400 16px "Segoe UI", "Noto Sans TC", sans-serif; fill: #94A3B8; }
+      .sectionTitle { font: 700 20px "Segoe UI", "Noto Sans TC", sans-serif; fill: #E2E8F0; }
+      .sectionDesc { font: 400 13px "Segoe UI", "Noto Sans TC", sans-serif; fill: #94A3B8; }
+      .fileText { font: 500 14px "Consolas", "JetBrains Mono", monospace; fill: #E5E7EB; }
+      .smallText { font: 400 12px "Segoe UI", "Noto Sans TC", sans-serif; fill: #A5B4FC; }
+      .labelText { font: 700 12px "Segoe UI", "Noto Sans TC", sans-serif; fill: #0F172A; }
+      .edgeText { font: 500 12px "Segoe UI", "Noto Sans TC", sans-serif; fill: #93C5FD; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="1080" fill="url(#bgGrad)"></rect>
+
+  <!-- Decorative glow -->
+  <circle cx="1320" cy="180" r="220" fill="#0EA5E9" opacity="0.08"></circle>
+  <circle cx="250" cy="920" r="260" fill="#8B5CF6" opacity="0.07"></circle>
+  <circle cx="780" cy="120" r="180" fill="#22C55E" opacity="0.05"></circle>
+
+  <!-- Header -->
+  <text x="80" y="72" class="title">JobInsight-104 專案架構圖</text>
+  <text x="80" y="102" class="subtitle">104 人力銀行資料爬取 × FastAPI 後端 × React 前端 × 可匯出分析平台</text>
+
+  <!-- Outer panel -->
+  <rect x="60" y="130" rx="28" ry="28" width="1480" height="900" fill="url(#panelGrad)" stroke="#1E293B" stroke-width="1.5" filter="url(#shadow)"></rect>
+
+  <!-- Top badges -->
+  <rect x="80" y="150" rx="14" ry="14" width="118" height="34" fill="url(#accentBlue)" filter="url(#softGlow)"></rect>
+  <text x="139" y="172" text-anchor="middle" class="labelText">Python</text>
+
+  <rect x="212" y="150" rx="14" ry="14" width="126" height="34" fill="url(#accentGreen)"></rect>
+  <text x="275" y="172" text-anchor="middle" class="labelText">FastAPI</text>
+
+  <rect x="352" y="150" rx="14" ry="14" width="118" height="34" fill="url(#accentPurple)"></rect>
+  <text x="411" y="172" text-anchor="middle" class="labelText">React</text>
+
+  <rect x="484" y="150" rx="14" ry="14" width="118" height="34" fill="url(#accentOrange)"></rect>
+  <text x="543" y="172" text-anchor="middle" class="labelText">SQLite</text>
+
+  <rect x="616" y="150" rx="14" ry="14" width="118" height="34" fill="url(#accentPink)"></rect>
+  <text x="675" y="172" text-anchor="middle" class="labelText">pytest</text>
+
+  <!-- Section: Entry -->
+  <g>
+    <rect x="90" y="220" rx="24" ry="24" width="280" height="210" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="110" y="242" rx="10" ry="10" width="78" height="26" fill="url(#accentBlue)"></rect>
+    <text x="149" y="260" text-anchor="middle" class="labelText">入口層</text>
+    <text x="110" y="300" class="sectionTitle">App Entry &amp; Config</text>
+    <text x="110" y="324" class="sectionDesc">CLI 啟動、全域常數、環境設定</text>
+
+    <rect x="110" y="350" rx="12" ry="12" width="240" height="32" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="125" y="371" class="fileText">main.py</text>
+
+    <rect x="110" y="390" rx="12" ry="12" width="240" height="32" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="125" y="411" class="fileText">config.py</text>
+
+    <rect x="110" y="430" rx="12" ry="12" width="240" height="32" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="125" y="451" class="fileText">Pipfile</text>
+  </g>
+
+  <!-- Section: Scraper -->
+  <g>
+    <rect x="410" y="220" rx="24" ry="24" width="340" height="310" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="430" y="242" rx="10" ry="10" width="96" height="26" fill="url(#accentGreen)"></rect>
+    <text x="478" y="260" text-anchor="middle" class="labelText">核心爬蟲</text>
+    <text x="430" y="300" class="sectionTitle">scraper/</text>
+    <text x="430" y="324" class="sectionDesc">CLI 與 Web 共用的資料抓取核心</text>
+
+    <rect x="430" y="350" rx="12" ry="12" width="300" height="38" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="445" y="374" class="fileText">client.py</text>
+    <text x="630" y="374" class="smallText">Session / Rate Limit</text>
+
+    <rect x="430" y="398" rx="12" ry="12" width="300" height="38" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="445" y="422" class="fileText">parser.py</text>
+    <text x="625" y="422" class="smallText">純函數解析 / 無 I/O</text>
+
+    <rect x="430" y="446" rx="12" ry="12" width="300" height="38" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="445" y="470" class="fileText">models.py</text>
+    <text x="621" y="470" class="smallText">JobListing dataclass</text>
+  </g>
+
+  <!-- Section: Storage -->
+  <g>
+    <rect x="90" y="470" rx="24" ry="24" width="280" height="190" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="110" y="492" rx="10" ry="10" width="96" height="26" fill="url(#accentOrange)"></rect>
+    <text x="158" y="510" text-anchor="middle" class="labelText">資料輸出</text>
+    <text x="110" y="550" class="sectionTitle">storage/</text>
+    <text x="110" y="574" class="sectionDesc">CLI 匯出結果與 metadata</text>
+
+    <rect x="110" y="600" rx="12" ry="12" width="240" height="32" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="125" y="621" class="fileText">csv_writer.py</text>
+
+    <rect x="110" y="640" rx="12" ry="12" width="240" height="32" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="125" y="661" class="fileText">json_writer.py</text>
+  </g>
+
+  <!-- Section: Backend -->
+  <g>
+    <rect x="790" y="220" rx="24" ry="24" width="420" height="500" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="810" y="242" rx="10" ry="10" width="102" height="26" fill="url(#accentPurple)"></rect>
+    <text x="861" y="260" text-anchor="middle" class="labelText">後端 API</text>
+    <text x="810" y="300" class="sectionTitle">backend/ (FastAPI)</text>
+    <text x="810" y="324" class="sectionDesc">查詢任務、背景執行、歷史紀錄、匯出 API</text>
+
+    <rect x="810" y="350" rx="12" ry="12" width="380" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="825" y="373" class="fileText">main.py</text>
+    <text x="1085" y="373" class="smallText">App 初始化 / CORS / 路由掛載</text>
+
+    <rect x="810" y="392" rx="12" ry="12" width="380" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="825" y="415" class="fileText">database.py</text>
+    <text x="1095" y="415" class="smallText">SQLite CRUD</text>
+
+    <rect x="810" y="434" rx="12" ry="12" width="380" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="825" y="457" class="fileText">models.py</text>
+    <text x="1082" y="457" class="smallText">Pydantic SearchRequest</text>
+
+    <text x="810" y="500" class="sectionDesc">routes/</text>
+
+    <rect x="830" y="515" rx="12" ry="12" width="340" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="845" y="538" class="fileText">search.py</text>
+    <text x="1082" y="538" class="smallText">POST /api/search</text>
+
+    <rect x="830" y="557" rx="12" ry="12" width="340" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="845" y="580" class="fileText">tasks.py</text>
+    <text x="1050" y="580" class="smallText">任務 / 結果 / 取消 / 歷史</text>
+
+    <rect x="830" y="599" rx="12" ry="12" width="340" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="845" y="622" class="fileText">export.py</text>
+    <text x="1035" y="622" class="smallText">CSV / jobs 匯出</text>
+
+    <text x="810" y="670" class="sectionDesc">services/</text>
+
+    <rect x="830" y="685" rx="12" ry="12" width="340" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="845" y="708" class="fileText">scraper_service.py</text>
+    <text x="1033" y="708" class="smallText">背景執行 / 進度 / 統計</text>
+  </g>
+
+  <!-- Section: Frontend -->
+  <g>
+    <rect x="1250" y="220" rx="24" ry="24" width="270" height="350" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="1270" y="242" rx="10" ry="10" width="96" height="26" fill="url(#accentPink)"></rect>
+    <text x="1318" y="260" text-anchor="middle" class="labelText">前端 UI</text>
+    <text x="1270" y="300" class="sectionTitle">frontend/ (React + Vite)</text>
+    <text x="1270" y="324" class="sectionDesc">搜尋表單、表格、KPI、狀態機</text>
+
+    <rect x="1270" y="350" rx="12" ry="12" width="230" height="40" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="1285" y="375" class="fileText">App.jsx</text>
+    <text x="1390" y="392" class="smallText">idle / loading / done / error</text>
+
+    <rect x="1270" y="402" rx="12" ry="12" width="230" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="1285" y="425" class="fileText">api/client.js</text>
+
+    <rect x="1270" y="448" rx="12" ry="12" width="230" height="34" fill="#0B1220" stroke="#1E293B"></rect>
+    <text x="1285" y="471" class="fileText">components/</text>
+
+    <text x="1285" y="500" class="smallText">SearchForm / JobTable /</text>
+    <text x="1285" y="520" class="smallText">FilterBar / KPICards ...</text>
+  </g>
+
+  <!-- Section: Tests -->
+  <g>
+    <rect x="1250" y="610" rx="24" ry="24" width="270" height="110" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2" filter="url(#shadow)"></rect>
+    <rect x="1270" y="632" rx="10" ry="10" width="82" height="26" fill="url(#accentGreen)"></rect>
+    <text x="1311" y="650" text-anchor="middle" class="labelText">測試</text>
+    <text x="1270" y="690" class="sectionTitle">tests/</text>
+    <text x="1340" y="690" class="sectionDesc">pytest 單元測試</text>
+  </g>
+
+  <!-- Data Flow Arrows -->
+  <!-- Entry -> Scraper -->
+  <path d="M370 320 C400 320, 390 320, 410 320" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"></path>
+  <polygon points="405,314 420,320 405,326" fill="#38BDF8"></polygon>
+  <text x="380" y="304" class="edgeText">啟動設定</text>
+
+  <!-- Scraper -> Storage -->
+  <path d="M500 530 C500 610, 320 590, 370 590" stroke="#34D399" stroke-width="3" stroke-linecap="round"></path>
+  <polygon points="365,584 380,590 365,596" fill="#34D399"></polygon>
+  <text x="410" y="575" class="edgeText">CLI 匯出</text>
+
+  <!-- Scraper -> Backend -->
+  <path d="M750 380 C770 380, 770 380, 790 380" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"></path>
+  <polygon points="785,374 800,380 785,386" fill="#A78BFA"></polygon>
+  <text x="760" y="364" class="edgeText">共用核心</text>
+
+  <!-- Backend -> Frontend -->
+  <path d="M1210 430 C1230 430, 1230 430, 1250 430" stroke="#F472B6" stroke-width="3" stroke-linecap="round"></path>
+  <polygon points="1245,424 1260,430 1245,436" fill="#F472B6"></polygon>
+  <text x="1215" y="414" class="edgeText">REST API</text>
+
+  <!-- Backend -> Tests -->
+  <path d="M1210 650 C1230 650, 1230 650, 1250 650" stroke="#22C55E" stroke-width="3" stroke-linecap="round"></path>
+  <polygon points="1245,644 1260,650 1245,656" fill="#22C55E"></polygon>
+  <text x="1218" y="634" class="edgeText">驗證</text>
+
+  <!-- Backend internal vertical hint -->
+  <path d="M1000 384 L1000 705" stroke="#334155" stroke-dasharray="6 8" stroke-width="1.4" opacity="0.7"></path>
+
+  <!-- Footer note -->
+  <rect x="90" y="930" rx="18" ry="18" width="1430" height="70" fill="#0B1220" stroke="#1E293B"></rect>
+  <text x="120" y="970" class="sectionDesc">
+    架構重點：scraper 為共用核心，backend 負責任務與進度管理，frontend 呈現搜尋/篩選/KPI，storage 專注 CLI 輸出，tests 保證穩定性。
+  </text>
+</svg>

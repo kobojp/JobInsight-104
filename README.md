@@ -84,7 +84,7 @@ JobInsight-104/
 │
 └── tests/                     # pytest 單元測試
 ```
-
+![JobInsight-104 架構圖](./Architecture.svg)
 ---
 
 ## 安裝
