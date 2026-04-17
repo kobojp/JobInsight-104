@@ -153,6 +153,18 @@ python main.py -k "React" -a taipei -v --max-pages 10
 
 ### Web 模式
 
+#### Windows 一鍵啟動（推薦）
+
+| 腳本 | 說明 |
+|------|------|
+| `start.bat` | 同時啟動後端與前端（各自開新視窗） |
+| `start_backend.bat` | 單獨啟動後端（port 8000） |
+| `start_frontend.bat` | 單獨啟動前端（port 5173） |
+
+直接雙擊 `start.bat` 即可，會依序開啟後端與前端兩個 CMD 視窗。關閉視窗即停止服務。
+
+#### 手動啟動
+
 **啟動後端**（從專案根目錄）：
 
 ```bash
