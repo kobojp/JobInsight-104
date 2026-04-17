@@ -195,9 +195,9 @@ async def export_jobs_json(
 
 import asyncio
 import html as _html
+import sys
 from datetime import datetime
 from pydantic import BaseModel
-from playwright.sync_api import sync_playwright
 from backend.services.scraper_service import compute_stats
 
 
@@ -292,23 +292,49 @@ def _build_pdf_html(jobs: list[dict], stats: dict, total: int,
 
 
 def _html_to_pdf_sync(html_content: str) -> bytes:
-    """Run Playwright in sync mode (avoids Windows asyncio subprocess limitation)."""
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
-        page.set_content(html_content, wait_until="networkidle")
-        pdf_bytes = page.pdf(
-            format="A4",
-            landscape=True,
-            print_background=True,
-            margin={"top": "0mm", "bottom": "0mm", "left": "0mm", "right": "0mm"},
-        )
-        browser.close()
-    return pdf_bytes
+    """
+    Run async_playwright inside a brand-new event loop created in a worker thread.
+
+    Why this approach:
+    - sync_playwright fails on Linux/Colab when FastAPI's asyncio loop is detected.
+    - async_playwright with the main loop fails on Windows (SelectorEventLoop
+      doesn't support create_subprocess_exec).
+    - Solution: spawn a worker thread, create a fresh isolated event loop there,
+      run async_playwright inside it. Works on both platforms.
+    """
+    from playwright.async_api import async_playwright
+
+    async def _render() -> bytes:
+        async with async_playwright() as p:
+            browser = await p.chromium.launch()
+            page = await browser.new_page()
+            await page.set_content(html_content, wait_until="networkidle")
+            pdf_bytes = await page.pdf(
+                format="A4",
+                landscape=True,
+                print_background=True,
+                margin={"top": "0mm", "bottom": "0mm", "left": "0mm", "right": "0mm"},
+            )
+            await browser.close()
+        return pdf_bytes
+
+    # Windows needs ProactorEventLoop to support subprocess (Chromium launch).
+    # Linux/macOS can use the default new_event_loop.
+    if sys.platform == "win32":
+        loop = asyncio.ProactorEventLoop()
+    else:
+        loop = asyncio.new_event_loop()
+
+    asyncio.set_event_loop(loop)
+    try:
+        return loop.run_until_complete(_render())
+    finally:
+        loop.close()
+        asyncio.set_event_loop(None)
 
 
 async def _html_to_pdf(html_content: str) -> bytes:
-    """Run sync Playwright in a thread pool to avoid blocking the event loop."""
+    """Offload PDF generation to a thread pool so FastAPI stays non-blocking."""
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(None, _html_to_pdf_sync, html_content)
 
