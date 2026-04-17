@@ -2,6 +2,9 @@
 
 104.com.tw 職缺爬蟲與分析平台。支援 CLI 快速匯出與 Web 互動儀表板兩種使用模式，共用同一個爬蟲核心。
 
+## colab
+https://colab.research.google.com/github/kobojp/JobInsight-104/blob/master/JobInsight104_Colab.ipynb?hl=zh-tw#scrollTo=VFI6Nuss4mKk
+
 ---
 
 ## 功能特色

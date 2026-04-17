@@ -195,7 +195,8 @@ async def export_jobs_json(
 
 import asyncio
 import html as _html
-import sys
+import queue as _queue
+import threading
 from datetime import datetime
 from pydantic import BaseModel
 from backend.services.scraper_service import compute_stats
@@ -293,14 +294,17 @@ def _build_pdf_html(jobs: list[dict], stats: dict, total: int,
 
 def _html_to_pdf_sync(html_content: str) -> bytes:
     """
-    Run async_playwright inside a brand-new event loop created in a worker thread.
+    Generate PDF via Playwright in a dedicated daemon thread.
 
-    Why this approach:
-    - sync_playwright fails on Linux/Colab when FastAPI's asyncio loop is detected.
-    - async_playwright with the main loop fails on Windows (SelectorEventLoop
-      doesn't support create_subprocess_exec).
-    - Solution: spawn a worker thread, create a fresh isolated event loop there,
-      run async_playwright inside it. Works on both platforms.
+    Why a dedicated thread with asyncio.run():
+    - Jupyter/Colab has a permanently-running asyncio loop in the main thread.
+      Any attempt to create/run another loop in the same thread raises
+      RuntimeError: 'Cannot run the event loop while another loop is running'.
+    - Windows SelectorEventLoop doesn't support create_subprocess_exec, so
+      sync_playwright fails on Windows uvicorn workers.
+    - Solution: spawn a brand-new thread (no inherited loop), call asyncio.run()
+      which creates a clean ProactorEventLoop (Windows) or SelectorEventLoop
+      (Linux/macOS) and runs to completion. Works everywhere.
     """
     from playwright.async_api import async_playwright
 
@@ -318,23 +322,29 @@ def _html_to_pdf_sync(html_content: str) -> bytes:
             await browser.close()
         return pdf_bytes
 
-    # Windows needs ProactorEventLoop to support subprocess (Chromium launch).
-    # Linux/macOS can use the default new_event_loop.
-    if sys.platform == "win32":
-        loop = asyncio.ProactorEventLoop()
-    else:
-        loop = asyncio.new_event_loop()
+    result_q: _queue.Queue = _queue.Queue()
 
-    asyncio.set_event_loop(loop)
-    try:
-        return loop.run_until_complete(_render())
-    finally:
-        loop.close()
-        asyncio.set_event_loop(None)
+    def _worker():
+        try:
+            result_q.put(("ok", asyncio.run(_render())))
+        except Exception as exc:
+            result_q.put(("err", exc))
+
+    t = threading.Thread(target=_worker, daemon=True)
+    t.start()
+    t.join(timeout=120)
+
+    if t.is_alive():
+        raise TimeoutError("PDF generation timed out after 120 seconds")
+
+    status, value = result_q.get()
+    if status == "err":
+        raise value
+    return value
 
 
 async def _html_to_pdf(html_content: str) -> bytes:
-    """Offload PDF generation to a thread pool so FastAPI stays non-blocking."""
+    """Offload to thread pool so FastAPI event loop stays non-blocking."""
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(None, _html_to_pdf_sync, html_content)
 
