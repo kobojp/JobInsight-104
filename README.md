@@ -188,17 +188,45 @@ npm run dev
 
 `--area` 支援以下名稱（可用逗號組合多個）：
 
-| 名稱 | 地區 | 名稱 | 地區 |
+### 縣市代碼
+
+| 代碼 | 地區 | 代碼 | 地區 |
 |------|------|------|------|
 | `taipei` | 台北市 | `taichung` | 台中市 |
 | `new_taipei` | 新北市 | `tainan` | 台南市 |
 | `taoyuan` | 桃園市 | `kaohsiung` | 高雄市 |
 | `hsinchu` | 新竹縣市 | `keelung` | 基隆市 |
+| `miaoli` | 苗栗縣 | `changhua` | 彰化縣 |
+| `nantou` | 南投縣 | `yunlin` | 雲林縣 |
+| `chiayi` | 嘉義縣市 | `pingtung` | 屏東縣 |
 | `yilan` | 宜蘭縣 | `hualien` | 花蓮縣 |
+| `taitung` | 台東縣 | `penghu` | 澎湖縣 |
+| `kinmen` | 金門縣 | `lienchiang` | 連江縣 |
 
-台北市行政區範例：`taipei_daan`、`taipei_xinyi`、`taipei_zhongshan`  
-新北市行政區範例：`ntpc_banqiao`、`ntpc_xindian`、`ntpc_tamsui`  
-桃園市行政區範例：`tao_zhongli`、`tao_taoyuan`、`tao_guishan`  
+### 行政區代碼（前綴範例）
+
+| 縣市 | 前綴 | 範例 |
+|------|------|------|
+| 台北市 | `taipei_` | `taipei_daan`、`taipei_xinyi`、`taipei_zhongshan` |
+| 新北市 | `ntpc_` | `ntpc_banqiao`、`ntpc_xindian`、`ntpc_tamsui` |
+| 桃園市 | `tao_` | `tao_zhongli`、`tao_taoyuan`、`tao_guishan` |
+| 基隆市 | `kl_` | `kl_renai`、`kl_xinyi`、`kl_zhongzheng` |
+| 新竹縣市 | `hc_` | `hc_hsinchu`、`hc_zhubei`、`hc_zhudong` |
+| 苗栗縣 | `ml_` | `ml_miaoli`、`ml_zhunan`、`ml_toufen` |
+| 台中市 | `tc_` | `tc_xitun`、`tc_beitun`、`tc_fengyuan` |
+| 彰化縣 | `ch_` | `ch_changhua`、`ch_yuanlin`、`ch_lugang` |
+| 南投縣 | `nantou_` | `nantou_nantou`、`nantou_puli`、`nantou_caotun` |
+| 雲林縣 | `yl_` | `yl_douliu`、`yl_huwei`、`yl_beigang` |
+| 嘉義縣市 | `cy_` | `cy_chiayi`、`cy_puzi`、`cy_minxiong` |
+| 台南市 | `tn_` | `tn_east`、`tn_yongkang`、`tn_xinying` |
+| 高雄市 | `ks_` | `ks_xinxing`、`ks_lingya`、`ks_qianjin` |
+| 屏東縣 | `pt_` | `pt_pingtung`、`pt_chaozhou`、`pt_donggang` |
+| 宜蘭縣 | `ilan_` | `ilan_yilan`、`ilan_luodong`、`ilan_suao` |
+| 花蓮縣 | `hl_` | `hl_hualien`、`hl_fenglin`、`hl_yuli` |
+| 台東縣 | `tt_` | `tt_taitung`、`tt_beinan`、`tt_guanshan` |
+| 澎湖縣 | `ph_` | `ph_magong`、`ph_huxi`、`ph_baisha` |
+| 金門縣 | `km_` | `km_jincheng`、`km_jinhu`、`km_jinsha` |
+| 連江縣 | `lc_` | `lc_nangan`、`lc_beigan`、`lc_juguang` |
 
 完整代碼列表請見 [config.py](config.py)。
 
